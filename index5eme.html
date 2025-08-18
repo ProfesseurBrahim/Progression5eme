@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Progression de Mathématiques 5e</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+   /* Fond général de la page */
+body {
+  font-family: Arial, sans-serif;
+  margin: 30px;
+  background: linear-gradient(to right, #dbe4f0, #c8d2e4);
+  color: #1a1a1a;
+}
+
+/* Titre */
+h1 {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 40px;
+  font-size: 26px;
+  border: 2px solid #8dbbe6;
+  border-radius: 10px;
+  background-color: #eef6ff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+      
+/* Accordéons */
+.accordion {
+  position: relative;
+  background-color: #dbeeff;
+  color: #1a1a1a;
+  cursor: pointer;
+  padding: 14px 20px;
+  width: 100%;
+  border: 1px solid #8dbbe6;
+  border-radius: 6px;
+  text-align: left;
+  font-size: 18px;
+  margin-bottom: 8px;
+  transition: background-color 0.3s ease;
+}
+.accordion:hover { background-color: #c1e0ff; }
+.accordion .arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 0.3s ease;
+  font-size: 16px;
+}
+.accordion.active .arrow { transform: translateY(-50%) rotate(90deg); }
+
+
+/* Bouton accordéon version rouge */
+.accordion.red {
+  background-color: #ffd6d6;
+  border: 1px solid #e6aaaa;
+}
+
+.accordion.red:hover {
+  background-color: #ffc0c0;
+}
+
+
+/* Liens dans les boutons d'accordéon en noir */
+.accordion a,
+.accordion a:visited {
+  color: #1a1a1a;
+  text-decoration: underline;
+}
+.accordion a:hover,
+.accordion a:focus {
+  color: #1a1a1a;
+  text-decoration: underline;
+}
+      
+/* Panneaux */
+.panel {
+  display: none;
+  padding: 0;
+  background-color: transparent;
+  border: 0px solid #ccc;
+  border-top: none;
+  margin-bottom: 20px;
+  border-radius: 0 0 0px 0px;
+  overflow-x: auto;
+}
+
+
+
+.accordion.violet {
+  background-color: #eadcff;
+  border: 1px solid #c7b3ec;
+}
+.accordion.violet:hover {
+  background-color: #dbc9ff;
+}
+
+.accordion.green {
+  background-color: #d4f8d4;
+  border: 1px solid #a5e0a5;
+}
+.accordion.green:hover {
+  background-color: #bff0bf;
+}
+
+.accordion a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  text-decoration: underline;
+}
+  
+.accordion.white {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  color: #333;
+}
+.accordion.white:hover {
+  background-color: #e9e9e9;
+}
+
+.accordion.multicolor {
+  background: linear-gradient(90deg, #f44336, #ff9800, #ffeb3b, #4caf50, #2196f3, #9c27b0);
+  color: white;
+  font-weight: bold;
+  border: 1px solid #ccc;
+}
+.accordion.multicolor:hover {
+  filter: brightness(1.1);
+}
+
+.num-circle {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: 900;
+  color: black;
+  margin-right: 8px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #f44336, #ff9800, #ffeb3b, #4caf50, #2196f3, #9c27b0);
+  box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+
+
+
+/* Bouton en haut à droite */
+#dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #444;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background 0.3s;
+}
+#dark-mode-toggle:hover {
+  background: #222;
+}
+
+/* Mode nuit */
+body.dark-mode {
+  background: #121212 !important;  /* remplace le dégradé clair */
+}
+
+#close-accordions-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #444;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 1000;
+}
+#close-accordions-button:hover {
+  background: #222;
+}	  
+
+
+.mental-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cartes fixes */
+  gap: 12px;
+  margin-top: 1px;
+}
+
+.mental-card {
+  background: #fff;
+  border: 1px solid #c8d2e4;
+  border-radius: 10px;
+  padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.mental-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mental-card small {
+  font-size: 0.75rem;
+  color: #555;
+}
+
+.mental-card a {
+  background: #8dbbe6;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.3s;
+}
+
+.mental-card a:hover {
+  background: #6ba5d8;
+}
+
+
+#mental-panel {
+  background: transparent !important;
+border: none;
+}
+
+/* === STYLE CARTES POUR LES SEQUENCES === */
+.sequence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.sequence-card {
+  background: #fff;
+  border: 1px solid #c8d2e4;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.2s ease;
+}
+.sequence-card:hover { transform: translateY(-3px); }
+
+.sequence-card h3 {
+  text-align: center;
+  font-size: 1rem;
+  margin: 0;
+  color: #1a1a1a;
+}
+.sequence-card small {
+  font-size: 0.85rem;
+  color: #1a1a1a;
+}
+.sequence-card p {
+  font-size: 0.9rem;
+  color: #333;
+  margin: 0;
+}
+.sequence-card a {
+  align-self: flex-start;
+  background: #8dbbe6;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+.sequence-card a:hover { background: #6ba5d8; }
+
+/* Mini accordéon pour Compétences / Exemples */
+.mini-accordion {
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  padding: 2px 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 0.9rem;  
+  margin-top: 2px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mini-accordion:hover { background-color: #f5f5f5; }
+.mini-accordion .arrow { float: right; transition: transform 0.3s ease; }
+.mini-accordion.active .arrow { transform: rotate(90deg); }
+
+.mini-panel {
+  display: none;
+  padding: 8px 10px;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  color: #444;
+}
+
+/* --------- Liens d'activités (DOCUMENT) --------- */
+.sequence-links { margin-top: 2px; }
+.sequence-links a {
+  position: relative;
+  display: block;
+  background: #8dbbe6;
+  color: white;
+  padding: 6px 10px 6px 34px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+.sequence-links a:hover { background: #6ba5d8; }
+.sequence-links a::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 4l4 4h-4V4zM8 9h6v2H8V9zm0 4h8v2H8v-2zm0 4h8v2H8v-2z"/></svg>') no-repeat center/contain;
+          mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 4l4 4h-4V4zM8 9h6v2H8V9zm0 4h8v2H8v-2zm0 4h8v2H8v-2z"/></svg>') no-repeat center/contain;
+  opacity: 0.95;
+  pointer-events: none;
+}
+.sequence-links a.no-icon::before { display: none; }
+
+/* --------- Liens YouTube --------- */
+.sequence-linksYT a {
+  position: relative;
+  display: block;
+  background: #FFA07A;
+  color: white;
+  padding: 6px 10px 6px 42px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+.sequence-linksYT a:hover { background: #FA8072; }
+.sequence-linksYT a::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 16'%3E%3Crect x='0' y='0' width='24' height='16' rx='3' ry='3' fill='%23FF0000'/%3E%3Cpolygon points='10,4 16,8 10,12' fill='%23FFFFFF'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* --------- Liens Exercices --------- */
+.sequence-linksEXE a {
+  position: relative;
+  display: block;
+  background: #6FCF97;
+  color: white;
+  padding: 6px 10px 6px 34px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+.sequence-linksEXE a:hover { background: #57C47F; }
+.sequence-linksEXE a::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  background-color: currentColor;
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="2" y="8" width="2" height="8"/><rect x="4" y="7" width="2" height="10"/><rect x="6" y="10" width="12" height="4"/><rect x="18" y="7" width="2" height="10"/><rect x="20" y="8" width="2" height="8"/></svg>') no-repeat center/contain;
+          mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="2" y="8" width="2" height="8"/><rect x="4" y="7" width="2" height="10"/><rect x="6" y="10" width="12" height="4"/><rect x="18" y="7" width="2" height="10"/><rect x="20" y="8" width="2" height="8"/></svg>') no-repeat center/contain;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+/* --------- Liens Évaluations --------- */
+.sequence-linksEVAL a {
+  position: relative;
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  padding: 6px 10px 6px 42px;
+  background: linear-gradient(90deg,
+    rgba(229,57,53,0.82) 0%,
+    rgba(251,140,0,0.82) 50%,
+    rgba(67,160,71,0.82) 100%
+  ) !important;
+  transition: background 0.25s ease;
+}
+.sequence-linksEVAL a:hover {
+  background: linear-gradient(90deg,
+    #c62828 0%,
+    #ef6c00 50%,
+    #2e7d32 100%
+  ) !important;
+}
+.sequence-linksEVAL a::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  background-color: currentColor;
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="18" rx="2" ry="2"/><rect x="9" y="2" width="6" height="4" rx="1" ry="1"/><rect x="8" y="9" width="8" height="2"/><rect x="8" y="13" width="8" height="2"/><rect x="8" y="17" width="8" height="2"/></svg>') no-repeat center/contain;
+          mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="18" rx="2" ry="2"/><rect x="9" y="2" width="6" height="4" rx="1" ry="1"/><rect x="8" y="9" width="8" height="2"/><rect x="8" y="13" width="8" height="2"/><rect x="8" y="17" width="8" height="2"/></svg>') no-repeat center/contain;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+/* Layout responsive des blocs de liens */
+.sequence-links,
+.sequence-linksYT,
+.sequence-linksEXE,
+.sequence-linksEVAL {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+.sequence-links a,
+.sequence-linksYT a,
+.sequence-linksEXE a,
+.sequence-linksEVAL a {
+  text-align: center;
+}
+
+  </style>
+</head>
+<body>
+	
+<button id="close-accordions-button">▶️ Fermer tout</button>
+	
+<button id="dark-mode-toggle">🌙 Mode nuit</button>
+
+	
+<h1>Mathématiques - Sixième</h1>
+
+
+
+
+<!-- Séquence transversale : Calcul mental -->
+<button class="accordion multicolor">
+  <a href="#" target="_blank">
+    Calcul mental et automatismes
+  </a>
+  <span class="arrow">&#9654;</span>
+</button>
+
+<div class="panel" id="mental-panel">
+  <div class="mental-grid">
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">1</span><div><strong> Tables de multiplication </strong> <br><small> Jusqu'à la table de 12 </small> </div></div><a href="CalculMental/1 - Tables de multplication.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">2</span><div><strong> Complément à 10, 100, 1 000… </strong><br></div></div><a href="CalculMental/2 - Complément à 10,100,1000....pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">3</span><div><strong> Doubles et moitiés de nombres entiers</strong><br></div></div><a href="CalculMental/3 - Doubles et moitiés de nombres entiers.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">4</span><div><strong> Sommes et différences</strong><br> <small> Par un nombre terminant par 8 ou 9 </small>  </div></div><a href="CalculMental/4 - Ajouter ou retrancher un nombre terminant par 8 ou 9.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">5</span><div><strong> Quadruples et quarts de nombres entiers</strong><br></div></div><a href="CalculMental/5 - Quadruples et quarts de nombres entiers.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">6</span><div><strong> Multiplier ou diviser par 5</strong><br></div></div><a href="CalculMental/6 - Multiplier ou diviser par 5.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">7</span><div><strong> Critère de divisibilité par 3</strong><br></div></div><a href="CalculMental/7 - Critère de divisibilité par 3.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">8</span><div><strong> Critère de divisibilité par 9</strong><br></div></div><a href="CalculMental/8 - Critère de divisibilité par 9.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">9</span><div><strong> Conversions de durées </strong><br></div></div><a href="CalculMental/9 - Conversions de durées.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">10</span><div><strong> Multiplier par 11   </strong><br></div></div><a href="CalculMental/10 - Multiplier par 11.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">11</span><div><strong> Multiplier par 8 </strong><br></div></div><a href="CalculMental/11 - Multiplier par 8.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">12</span><div><strong> Multiplier par 25  </strong><br></div></div><a href="CalculMental/12 - Multiplier par 25.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">13</span><div><strong> Numération décimale   </strong><br></div></div><a href="CalculMental/13 - Numération décimale.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">14</span><div><strong> Fractions et nombres décimaux   </strong><br></div></div><a href="CalculMental/14 - Fractions décimales et nombres décimaux.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">15</span><div><strong> Multiplier par 9   </strong><br></div></div><a href="CalculMental/15 - Multiplier par 9.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">16</span><div><strong> Les diviseurs de 360, 180 et 90    </strong><br></div></div><a href="CalculMental/16 - Les diviseurs de 360, 180 et 90.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">17</span><div><strong> Multiplier par 15        </strong><br></div></div><a href="CalculMental/17 - Multiplier par 15.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">18</span><div><strong> Priorités opératoires   </strong><br><small> Sans parenthèses </small></div></div><a href="CalculMental/18 - Priorités opératoires (sans parenthèses).pdf" target="_blank">Exemples</a></div> 
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">19</span><div><strong> Priorités opératoires  </strong><br><small> Avec parenthèses </small></div></div><a href="CalculMental/19 - Priorités opératoires (avec parenthèses).pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">20</span><div><strong> Complément à 1        </strong><br></div></div><a href="CalculMental/20 - Complément à 1.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">21</span><div><strong> Multiplier par 10, 100 ou 1 000   </strong><br></div></div><a href="CalculMental/21 - Multiplier par 10, 100 ou 1000.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">22</span><div><strong> Diviser par 10, 100 ou 1 000    </strong><br></div></div><a href="CalculMental/22 - Diviser par 10, 100 ou 1000.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">23</span><div><strong> Multiplier par 0,1 ou 0,01 ou 0,001    </strong><br></div></div><a href="CalculMental/23 - Multiplier par 0.1, 0.01, 0.001.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">24</span><div><strong> Conversions  </strong><br><small> De longueur, masse et capacité </small></div></div><a href="CalculMental/24 - Conversions.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">25</span><div><strong> Arrondi d’un nombre       </strong><br></div></div><a href="CalculMental/25 - Arrondi d'un nombre.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">26</span><div><strong> Doubles et moitiés de nombres décimaux  </strong><br></div></div><a href="CalculMental/26 - Doubles et moitiés de nombres décimaux.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">27</span><div><strong> Diviser par 125      </strong><br></div></div><a href="CalculMental/27 - Diviser par 125.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">28</span><div><strong> Egalités de quotients  </strong><br></div></div><a href="CalculMental/28 - Egalités de quotients.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">29</span><div><strong> Multiplier par 1/2 ou par 1/4 ou par 1/5   </strong><br></div></div><a href="CalculMental/29 - Multiplier par 1 2 ou par 1 4 ou par 1 5.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">30</span><div><strong> Calcul de périmètres    </strong><br></div></div><a href="CalculMental/30 - Calcul de périmètres.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">31</span><div><strong> Conversions     </strong><br> <small> D'unités d’aire </small></div></div><a href="CalculMental/31 -Conversions (unités d'aire).pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">32</span><div><strong> Calcul d’aires         </strong><br></div></div><a href="CalculMental/32 - Calcul d'aires.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">33</span><div><strong> Multiplier par 0,5 ou par 0,25 ou par 0,2   </strong><br></div></div><a href="CalculMental/33 - Multiplier par 0.5 ou par 0.25 ou par 0.2.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">34</span><div><strong> Multiplier par 1,5        </strong><br></div></div><a href="CalculMental/34 - Multiplier par 1.5.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">35</span><div><strong> Tableaux de proportionnalité      </strong><br></div></div><a href="CalculMental/35 - Tableaux de proportionnalité.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">36</span><div><strong> Pourcentages simples </strong><br><small> 50%,25%,20%,10%,5%,1% </small></div></div><a href="CalculMental/36 - Pourcentages simples.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">37</span><div><strong> Pourcentage d’un nombre </strong><br></div></div><a href="CalculMental/37 - Pourcentage d'un nombre.pdf" target="_blank">Exemples</a></div>
+      <div class="mental-card"><div class="mental-card-header"><span class="num-circle">38</span><div><strong> Conversions </strong><br><small> D'unités de volume </small></div></div><a href="CalculMental/38 - Conversions (unités de volume).pdf" target="_blank">Exemples</a></div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Séquence 1 -->
+<button class="accordion">
+  <a href="Cours/Chapitre 1 - Calcul numérique.pdf">
+    Séquence 1 : Calcul numérique
+  </a>
+  <span class="arrow">&#9654;</span>
+</button>
+
+<div class="panel">
+  <div class="sequence-grid">
+
+    <!-- Carte 1 -->
+    <div class="sequence-card">
+      <h3>Numération jusqu’à milliard</h3>
+
+      <button class="mini-accordion">Compétence(s) <span class="arrow">▶</span></button>
+      <div class="mini-panel">• Connaitre des grands nombres entiers.</div>
+
+      <button class="mini-accordion">Exemple(s) de réussite <span class="arrow">▶</span></button>
+      <div class="mini-panel">• Les principes de la numération décimale de position sont étendus à la classe des milliards.</div>
+
+      <div class="sequence-links">
+        <a href="Activités/S1/Activité 1 - Tableau de numération.pdf">Activité : Tableau de numération</a>
+      </div>
+
+        <div class="sequence-linksYT">
+        <a href="https://www.youtube.com/watch?v=idB0-F7b1Yk" target="_blank">Vidéo explicative</a>
+        <a href="https://www.youtube.com/watch?v=TJH-fiwAt5s" target="_blank">Exercices corrigés</a>
+      </div>
+
+      <div class="sequence-linksEXE">
+        <a href="Exercices/S1/Exercice 1.pdf" target="_blank">Exercice 1</a>
+        <a href="Exercices/S1/Exercice 2.pdf" target="_blank">Exercice 2</a>
+        <a href="Exercices/S1/Exercice 3.pdf" target="_blank">Exercice 3</a>
+      </div>
+
+      <div class="sequence-linksEVAL">
+        <a href="Evaluations/S1/Evaluation 1.pdf" target="_blank">Évaluation</a>
+      </div>
+        
+    </div>
+
+    <!-- Carte 2 -->
+    <div class="sequence-card">
+      <h3>Décomposition et différentes écritures</h3>
+
+      <button class="mini-accordion">Compétence(s) <span class="arrow">▶</span></button>
+      <div class="mini-panel">• Connaître et utiliser la valeur des chiffres selon leur rang.<br>• Connaître les liens entre unités de numération.</div>
+
+      <button class="mini-accordion">Exemple(s) de réussite <span class="arrow">▶</span></button>
+      <div class="mini-panel">• Dans 1,27, l’élève identifie le chiffre des centièmes qu'il distingue du nombre de centièmes.</div>
+
+      <div class="sequence-links">
+        <a href="Activités/S1/Activité 2 - Ecriture des nombres.pdf">Activité 2 - Écriture des nombres</a>
+        <a href="Activités/S1/Activité 3 - Décomposition 1.pdf">Activité 3 - Décomposition 1</a>
+        <a href="Activités/S1/Activité 4 - Décomposition 2.pdf">Activité 4 - Décomposition 2</a>
+      </div>
+    </div>
+
+    <!-- Carte 3 -->
+    <div class="sequence-card">
+      <h3>Demi-droite graduée et abscisse entière</h3>
+
+      <button class="mini-accordion">Compétence(s) <span class="arrow">▶</span></button>
+      <div class="mini-panel">• Placer sur une demi-droite graduée un point dont l’abscisse est un nombre entier.<br>• Repérer un nombre entier sur une demi-droite graduée.</div>
+
+      <button class="mini-accordion">Exemple(s) de réussite <span class="arrow">▶</span></button>
+      <div class="mini-panel">• La graduation de la demi-droite est adaptée aux nombres proposés.</div>
+
+      <div class="sequence-links">
+        <a href="Activités/S1/Activité 5 - Chauve souris.pdf">Activité 5 - Chauve souris</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    <!-- Séquence 2 -->
+<button class="accordion red">
+  <a href="Cours/Chapitre 2 - Géométrie.pdf">
+    Séquence 2 : Géométrie (rappels)
+  </a>
+  <span class="arrow">&#9654;</span>
+</button>
+
+<div class="panel">
+  <div class="sequence-grid">
+
+    <!-- Carte 1 -->
+    <div class="sequence-card">
+      <h3>Vocabulaire et notations</h3>
+
+      <button class="mini-accordion">Compétence(s) <span class="arrow">▶</span></button>
+      <div class="mini-panel">
+        • Utiliser le vocabulaire géométrique approprié.<br>
+        • Utiliser les outils usuels (règle, équerre, compas).<br>
+        • Connaitre les notations et les codes usuels.<br>
+        • Reconnaitre et utiliser la perpendicularité et le parallélisme.
+      </div>
+
+      <button class="mini-accordion">Exemple(s) de réussite <span class="arrow">▶</span></button>
+      <div class="mini-panel">
+        • L’élève utilise à bon escient : point, droite, segment, demi-droite, milieu…<br>
+        • Il sait reconnaître droites perpendiculaires, parallèles, angle droit, aigu, obtus.<br>
+        • Il connaît les symboles ⊥ ; // ; ∈ ; ∉ et sait utiliser les codages géométriques.
+      </div>
+
+      <div class="sequence-links">
+        <a href="#">Lien à ajouter</a>
+      </div>
+    </div>
+
+    <!-- Carte 2 -->
+    <div class="sequence-card">
+      <h3>Constructions simples</h3>
+
+      <button class="mini-accordion">Compétence(s) <span class="arrow">▶</span></button>
+      <div class="mini-panel">
+       • Construire une figure géométrique composée de segments, droites, polygones usuels, cercles.
+      </div>
+
+      <button class="mini-accordion">Exemple(s) de réussite <span class="arrow">▶</span></button>
+      <div class="mini-panel">
+       • L’élève sait construire une figure à partir d’un programme de construction (parallèles, perpendiculaires, cercles, polygones…).
+      </div>
+
+      <div class="sequence-links">
+        <a href="#">Lien à ajouter</a>
+      </div>
+    </div>
+
+    <!-- Carte 3 -->
+    <div class="sequence-card">
+      <h3>Tracer aux instruments</h3>
+
+      <button class="mini-accordion">Compétence(s) <span class="arrow">▶</span></button>
+      <div class="mini-panel">
+       • Tracer à la règle et à l’équerre des droites, segments, perpendiculaires et parallèles.
+      </div>
+
+      <button class="mini-accordion">Exemple(s) de réussite <span class="arrow">▶</span></button>
+      <div class="mini-panel">
+       • Exemple : trace une perpendiculaire passant par A extérieur à (d).
+      </div>
+
+      <div class="sequence-links">
+        <a href="Activités/S2/Activité 1 - billard (perpendiculaire).pdf">Activité 1 - Billard</a>
+        <a href="Activités/S2/Activité 2 - Poséidon et Ulysse.pdf">Activité 2 - Poséidon et Ulysse</a>
+        <a href="Activités/S2/Activité 3 - Flextangle.pdf">Activité 3 - Flextangle</a>
+      </div>
+    
+
+        <div class="sequence-linksYT">
+        <a href="https://www.youtube.com/watch?v=idB0-F7b1Yk" target="_blank">Vidéo explicative</a>
+        <a href="https://www.youtube.com/watch?v=TJH-fiwAt5s" target="_blank">Exercices corrigés</a>
+      </div>
+
+      <div class="sequence-linksEXE">
+        <a href="Exercices/S2/Exercice 1.pdf">Exercice 1</a>
+        <a href="Exercices/S2/Exercice 2.pdf">Exercice 2</a>
+        <a href="Exercices/S2/Exercice 3.pdf">Exercice 3</a>
+      </div>
+
+      <div class="sequence-linksEVAL">
+        <a href="Evaluations/S2/Evaluation 1.pdf">Évaluation</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const accordions = document.querySelectorAll(".accordion");
+    accordions.forEach(button => {
+      button.addEventListener("click", () => {
+        button.classList.toggle("active");
+        const panel = button.nextElementSibling;
+        panel.style.display = panel.style.display === "block" ? "none" : "block";
+      });
+    });
+  });
+</script>
+
+<script>
+  // Empêche l'ouverture de l'accordéon quand on clique sur un lien dans le bouton
+  document.querySelectorAll('.accordion a').forEach(link => {
+    link.addEventListener('click', function(event) {
+      event.stopPropagation();
+    });
+  });
+</script>
+
+<script>
+  const toggleButton = document.getElementById('dark-mode-toggle');
+  toggleButton.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    toggleButton.textContent = document.body.classList.contains('dark-mode') 
+      ? '☀️ Mode jour' 
+      : '🌙 Mode nuit';
+  });
+</script>
+
+<script>
+  // Fermer tous les accordéons
+  document.getElementById('close-accordions-button').addEventListener('click', () => {
+    document.querySelectorAll('.accordion').forEach((btn) => {
+      btn.classList.remove('active');
+    });
+    document.querySelectorAll('.panel').forEach((panel) => {
+      panel.style.display = 'none';
+    });
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".mini-accordion").forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("active");
+      const panel = btn.nextElementSibling;
+      panel.style.display = (panel.style.display === "block") ? "none" : "block";
+    });
+  });
+});
+</script>
+
+<script>
+// === Bouton "Fermer tout" ===
+document.getElementById("close-accordions-button").addEventListener("click", function () {
+  // Fermer les grands accordéons
+  document.querySelectorAll(".accordion").forEach((acc) => {
+    acc.classList.remove("active");
+    const panel = acc.nextElementSibling;
+    if (panel) panel.style.display = "none";
+  });
+
+  // Fermer les mini-accordéons
+  document.querySelectorAll(".mini-accordion").forEach((btn) => {
+    btn.classList.remove("active");
+    const miniPanel = btn.nextElementSibling;
+    if (miniPanel) miniPanel.style.display = "none";
+  });
+});
+</script>
+
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
