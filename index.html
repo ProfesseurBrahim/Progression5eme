@@ -470,6 +470,37 @@ border: none;
   text-align: center;
 }
 
+#title-container {
+  display: flex;
+  justify-content: center;   /* centre l’ensemble */
+  align-items: flex-start;   /* aligne en haut */
+  gap: 20px;                 /* espace entre les deux cadres */
+  flex-wrap: wrap;           /* permet retour à la ligne sur petits écrans */
+  margin-bottom: 40px;
+}
+
+#title-container h1 {
+  margin: 0;
+  flex: 0 1 800px;           /* garde la largeur max du h1 */
+}
+
+.small-link-box {
+  font-size: 16px;
+  padding: 6px 12px;
+  border: 2px solid #8dbbe6;
+  border-radius: 8px;
+  background-color: #eef6ff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  text-decoration: none;
+  color: #1a1a1a;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.small-link-box:hover {
+  background-color: #dbeeff;
+}
+	  
   </style>
 </head>
 <body>
@@ -481,7 +512,15 @@ border: none;
 	
 <h1>Mathématiques - Cinquième</h1>
 
-
+<div id="title-container">
+  <a href="https://professeurbrahim.github.io/Progression6eme/" 
+     class="small-link-box" 
+     target="_blank">Sixième</a>
+  <h1>Mathématiques - Cinquième</h1>
+    <a href="https://i.ytimg.com/vi/HECtD2Hh24o/maxresdefault.jpg" 
+     class="small-link-box" 
+     target="_blank">Quatrième</a>
+</div>
 
 <!-- Séquence 1 -->
 <button class="accordion">
