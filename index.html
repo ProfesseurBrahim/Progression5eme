@@ -277,6 +277,19 @@ border: none;
 }
 .sequence-card:hover { transform: translateY(-3px); }
 
+.sequence-card2 {
+  background: #6050dc;
+  border: 1px solid #c8d2e4;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.2s ease;
+}
+.sequence-card2:hover { transform: translateY(-3px); }	  
+
 .sequence-card h3 {
   text-align: center;
   font-size: 1rem;
@@ -304,6 +317,26 @@ border: none;
   transition: background 0.3s;
 }
 .sequence-card a:hover { background: #6ba5d8; }
+
+.sequence-card2 h3 {
+  text-align: center;
+  font-size: 1rem;
+  margin: 0;
+  color: #1a1a1a;
+}
+
+.sequence-card2 a {
+  align-self: flex-start;
+  background: #8dbbe6;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+.sequence-card2 a:hover { background: #6ba5d8; }	  
 
 /* Mini accordéon pour Compétences / Exemples */
 .mini-accordion {
@@ -579,37 +612,45 @@ border: none;
 
 <!-- Séance 0 -->
 <button class="accordion white2">
-    Séance 0 : introduction de l'année
+    Séance 0 : introduction
   <span class="arrow">&#9654;</span>
 </button>
 	
 <div class="panel">
 	<div class="sequence-grid">
-    	<!-- Carte 1 -->
+    <!-- Carte 1 -->
 		<div class="sequence-card">
-      <h3>Règles et organisation</h3>
-        <div class="sequence-links">
-        <a href="Rentrée/Accueil des élèves.pdf">Accueil des élèves</a>
-        <a href="Rentrée/Gestion des écrits.pdf">Gestion des écrits</a> 
-      </div>
+      		<h3>Règles et organisation</h3>
+        	<div class="sequence-links">
+        	<a href="Rentrée/Accueil des élèves.pdf">Accueil des élèves</a>
+        	<a href="Rentrée/Gestion des écrits.pdf">Gestion des écrits</a> 
+      		</div>
 		</div>
 	<!-- Carte 2 -->
 		<div class="sequence-card">
-      <h3>Questionnaire</h3>
-        <div class="sequence-links">
-        <a href="Rentrée/Questionnaire des élèves.pdf">Questionnaire des élèves</a>
-        </div>
+	      	<h3>Questionnaire</h3>
+	        <div class="sequence-links">
+	        <a href="Rentrée/Questionnaire des élèves.pdf">Questionnaire des élèves</a>
+	        </div>
+		</div>	
+	<!-- Carte 3 -->
+		<div class="sequence-card">
+	      	<h3>Activité de rentrée</h3>
+	        <div class="sequence-links">
+	        <a href="Rentrée/Activité -.pdf">Activité</a>
+	      	</div>
+		</div>	
+	<!-- Carte 4 -->
+		<div class="sequence-card2">
+	      	<h3>Livret d'autonomie</h3>
+	        <div class="sequence-links">
+	        <a href="Rentrée/Livret autonomie 5eme.pdf">Livret d'autonomie pour les rapides</a>
+	      	</div>
 		</div>	
 
-		<div class="sequence-card">
-      <h3>Activité de rentrée</h3>
-        <div class="sequence-links">
-        <a href="Rentrée/Activité -.pdf">Activité</a>
-      </div>
-		</div>	
-			
-      </div>
-	</div>	
+		
+    </div>
+</div>	
 
 
 
