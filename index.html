@@ -772,6 +772,58 @@ body.dark-mode {
 
 
 	  
+
+
+/* --- Fond ciel étoilé pour le mode nuit --- */
+body.dark-mode {
+  background: #000;
+  position: relative;
+}
+
+/* Conteneur des étoiles (en arrière-plan) */
+#star-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Derrière tout le reste */
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Petites étoiles fixes */
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* Étoiles filantes */
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(45deg, white, rgba(255,255,255,0));
+  opacity: 0.7;
+  transform: rotate(45deg);
+  animation: shoot 1.5s linear forwards;
+}
+
+@keyframes shoot {
+  from { transform: translate(0,0) rotate(45deg); opacity: 1; }
+  to { transform: translate(300px,300px) rotate(45deg); opacity: 0; }
+}
+
+
+
 	  
 	  
   </style>
@@ -2203,8 +2255,11 @@ document.getElementById("close-accordions-button").addEventListener("click", fun
 });
 </script>
 
-<div id="stars"></div>
-<div id="shooting-stars"></div>
+<!-- Fond d'étoiles (en arrière-plan) -->
+<div id="star-background">
+  <div id="stars"></div>
+  <div id="shooting-stars"></div>
+</div>
 
 <script>
 function createStars(count = 120) {
@@ -2244,6 +2299,7 @@ function randomShootingStars() {
 createStars();
 randomShootingStars();
 </script>
+
 
 	
     
