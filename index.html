@@ -782,34 +782,63 @@ body.dark-mode #star-background {
   to { transform: translate(300px,300px) rotate(45deg); opacity: 0; }
 }
 
-/* === Nuages pour le mode jour === */
+
+
+
+
+
+	  
+/* === Nuages version réaliste === */
 .cloud {
   position: fixed;
-  top: calc(10% + 30px * var(--i));
-  left: -200px;
-  width: 120px;
-  height: 60px;
-  background: #fff;
-  border-radius: 60px;
-  box-shadow: 30px 10px 0 10px #fff, 60px 0 0 20px #fff;
-  opacity: 0.8;
-  animation: floatClouds 60s linear infinite;
+  top: calc(5% + 15vh * var(--i));
+  left: -250px;
+  width: var(--w, 180px);
+  height: var(--h, 80px);
+  background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.9), rgba(255,255,255,0.6) 70%);
+  border-radius: 50%;
+  box-shadow:
+    60px 10px 0 10px rgba(255,255,255,0.7),
+    120px 20px 0 20px rgba(255,255,255,0.6),
+    180px 0px 0 15px rgba(255,255,255,0.5);
+  opacity: 0.9;
+  filter: blur(1px);
+  animation: floatClouds var(--speed, 90s) linear infinite;
   z-index: -1;
-  display: none; /* caché par défaut */
+  display: none; /* visible seulement en mode jour */
 }
 
-/* Affiché uniquement en mode jour (pas dark-mode) */
 body:not(.dark-mode) .cloud {
   display: block;
 }
 
+/* Animation du déplacement horizontal */
 @keyframes floatClouds {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(120vw); }
+  0% {
+    transform: translateX(0) scale(var(--scale, 1));
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120vw) scale(var(--scale, 1));
+    opacity: 0.8;
+  }
 }
 
+	  
 
 
+.cloud {
+  animation: floatClouds var(--speed, 90s) linear infinite,
+             cloudDrift 6s ease-in-out infinite alternate;
+}
+
+@keyframes cloudDrift {
+  0% { transform: translateY(0) scale(var(--scale, 1)); }
+  100% { transform: translateY(10px) scale(var(--scale, 1)); }
+}
 	  
 	  
   </style>
@@ -2245,10 +2274,14 @@ document.getElementById("close-accordions-button").addEventListener("click", fun
 
 
 	
+
 <!-- ☁️ Nuages du mode jour -->
-<div class="cloud" style="--i:1"></div>
-<div class="cloud" style="--i:2"></div>
-<div class="cloud" style="--i:3"></div>
+<div class="cloud" style="--i:1; --w:160px; --h:70px; --speed:80s; --scale:1;"></div>
+<div class="cloud" style="--i:2; --w:220px; --h:90px; --speed:120s; --scale:1.2;"></div>
+<div class="cloud" style="--i:3; --w:280px; --h:100px; --speed:150s; --scale:1.4;"></div>
+<div class="cloud" style="--i:4; --w:130px; --h:60px; --speed:70s; --scale:0.9;"></div>
+<div class="cloud" style="--i:5; --w:250px; --h:110px; --speed:180s; --scale:1.6;"></div>
+
 
 <!-- 🌌 Ciel étoilé du mode nuit -->
 <div id="star-background">
